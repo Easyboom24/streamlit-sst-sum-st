@@ -20,7 +20,7 @@ if file is not None:
 
     resultSummarization = summarization(resultText)
 
-    st.text(resultSummarization)
+    st.text(str(resultSummarization['predictions']))
 
 
     
