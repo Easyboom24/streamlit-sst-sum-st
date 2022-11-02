@@ -1,6 +1,7 @@
 import streamlit as st
 from speechToText import func_speech
 from boto_file import uploadToBucketAndGetPath
+from summariozation import summarization
 import streamlit as st
 import tempfile
 
@@ -16,6 +17,10 @@ if file is not None:
 
     resultText = func_speech(obj_response)
     st.text(resultText)
+
+    resultSummarization = summarization(resultText)
+
+    st.text(resultSummarization)
 
 
     
