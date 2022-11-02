@@ -1,5 +1,7 @@
 boto
 boto3
 requests
--U pip setuptools wheel
--U spacy
+wheel
+spacy
+spacy-legacy
+spacy-loggers
