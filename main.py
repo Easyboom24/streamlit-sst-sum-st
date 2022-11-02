@@ -3,10 +3,10 @@ from boto_file import uploadToBucketAndGetPath
 import streamlit as st
 import tempfile
 from summarization import summarization_sbercloud
-from summarization import summarization_spacy
-import os
 
-os.system("python -m spacy download ru_core_news_lg")
+# from summarization import summarization_spacy
+# import os
+# os.system("python -m spacy download ru_core_news_lg")
 
 
 file = st.file_uploader(label="Загрузите аудиозапись")
@@ -24,10 +24,10 @@ if file is not None:
     #TODO: преобразовывать процент в количество предложений исходя из максимального из resultText
     #TODO: подгрузить модель python -m spacy download ru_core_news_lg
     resultSummarizationSbercloud = summarization_sbercloud(resultText)
-    resultSummarizationSpacy = summarization_spacy(resultText, 5)
-
     st.text(str(resultSummarizationSbercloud['predictions']))
-    st.text(str(resultSummarizationSpacy))
+
+    # resultSummarizationSpacy = summarization_spacy(resultText, 5)
+    # st.text(str(resultSummarizationSpacy))
 
 
     
