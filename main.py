@@ -10,6 +10,7 @@ if file is not None:
     temp = tempfile.NamedTemporaryFile(mode="wb")
     bytes_data = file.getvalue()
     temp.write(bytes_data)
+    print(temp)
     obj_response = uploadToBucketAndGetPath('itis',temp.name)
 
     resultText = func_speech(obj_response)
@@ -17,3 +18,4 @@ if file is not None:
 
 
     
+
