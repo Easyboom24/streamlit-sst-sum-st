@@ -1,5 +1,5 @@
 boto
 boto3
 requests
-spacy
-pip setuptools wheel
+-U pip setuptools wheel
+-U spacy
