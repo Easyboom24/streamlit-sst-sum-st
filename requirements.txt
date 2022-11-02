@@ -1,3 +1,5 @@
 boto
 boto3
 requests
+spacy
+pip setuptools wheel
