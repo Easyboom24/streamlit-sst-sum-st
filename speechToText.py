@@ -29,6 +29,7 @@ def func_speech(audio):
 
     result = ""
     for chunk in res['response']['chunks']:
-        result += chunk['alternatives'][0]['text'] + "\n"
+        if chunk['channelTag'] == "1":
+            result += chunk['alternatives'][0]['text'] + "\n"
 
     return result
