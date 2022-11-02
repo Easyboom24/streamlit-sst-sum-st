@@ -14,7 +14,7 @@ if file is not None:
     obj_response = uploadToBucketAndGetPath('itis',temp.name)
 
     resultText = func_speech(obj_response)
-    print(resultText)
+    st.text(resultText)
 
 
     
