@@ -1,4 +1,3 @@
-from boto import uploadToBucket
 import requests
 import streamlit as st
 
