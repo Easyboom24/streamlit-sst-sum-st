@@ -1,7 +1,7 @@
 import requests
 import json
-import spacy
-#import spacy_streamlit
+#import spacy
+import spacy_streamlit
 from collections import Counter
 from string import punctuation
 import ru_core_news_lg
@@ -28,8 +28,8 @@ def summarization_sbercloud(text):
 
 def summarization_spacy(text, limitSentences=0):
     #nlp = spacy_streamlit.load_model("ru_core_news_lg")
-    #nlp = ru_core_news_lg.load()
-    nlp = spacy.load("ru_core_news_lg")
+    nlp = ru_core_news_lg.load()
+    #nlp = spacy.load("ru_core_news_lg")
     # токенизация
     keywords = []
     tags = ['PROPN', 'ADJ', 'NOUN', 'VERB']
