@@ -2,8 +2,8 @@ boto
 boto3
 requests
 wheel
-#spacy
-#spacy-legacy
-#spacy-loggers
-spacy_streamlit
+spacy
+spacy-legacy
+spacy-loggers
+#spacy_streamlit
 ru-core-news-lg @ https://github.com/explosion/spacy-models/releases/download/ru_core_news_lg-3.0.0/ru_core_news_lg-3.0.0-py3-none-any.whl
