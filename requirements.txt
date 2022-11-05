@@ -2,6 +2,7 @@ boto
 boto3
 requests
 wheel
-spacy
-spacy-legacy
-spacy-loggers
+#spacy
+#spacy-legacy
+#spacy-loggers
+spacy_streamlit
