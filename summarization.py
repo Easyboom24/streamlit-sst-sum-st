@@ -26,8 +26,7 @@ def summarization_sbercloud(text):
 
 
 def summarization_spacy(text, limitSentences=0):
-    #nlp = spacy_streamlit.load_model("ru_core_news_lg")
-    nlp = spacy_streamlit.load_model("ru_core_news_sm")
+    nlp = spacy_streamlit.load_model("ru_core_news_lg")
     #nlp = spacy.load("ru_core_news_lg")
     # токенизация
     keywords = []
