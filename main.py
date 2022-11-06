@@ -21,14 +21,10 @@ if file is not None:
     resultText = func_speech(obj_response)
     st.write(resultText)
 
-    #TODO: Сделать ползунок для выбора процента
-    #TODO: преобразовывать процент в количество предложений исходя из максимального из resultText
-    #TODO: подгрузить модель python -m spacy download ru_core_news_lg
-    #resultSummarizationSbercloud = summarization_sbercloud(resultText)
-    #st.text(str(resultSummarizationSbercloud['predictions']))
-
     resultSummarizationSpacy = summarization_spacy(resultText, percent_of_text_sum)
     st.text(str(resultSummarizationSpacy))
+
+    #TODO: аннотирование текста
 
 
     
