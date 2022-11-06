@@ -9,6 +9,7 @@ from summarization import summarization_spacy
 #os.system("python -m spacy download ru_core_news_lg")
 
 
+percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100, value=50)
 file = st.file_uploader(label="Загрузите аудиозапись")
 
 if file is not None:
@@ -26,7 +27,7 @@ if file is not None:
     #resultSummarizationSbercloud = summarization_sbercloud(resultText)
     #st.text(str(resultSummarizationSbercloud['predictions']))
 
-    resultSummarizationSpacy = summarization_spacy(resultText, 5)
+    resultSummarizationSpacy = summarization_spacy(resultText, percent_of_text_sum)
     st.text(str(resultSummarizationSpacy))
 
 

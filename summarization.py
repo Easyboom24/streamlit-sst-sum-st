@@ -26,7 +26,7 @@ def summarization_sbercloud(text):
     return json.loads(response.text)
 
 
-def summarization_spacy(text, limitSentences=0):
+def summarization_spacy(text, percent_of_text_sum=50):
     #nlp = spacy_streamlit.load_model("ru_core_news_lg")
     #nlp = ru_core_news_lg.load()
     nlp = spacy.load("ru_core_news_lg")
@@ -56,6 +56,11 @@ def summarization_spacy(text, limitSentences=0):
     summary = []
     sorted_x = sorted(sent_power.items(), key=lambda kv: kv[1], reverse=True)
     counter = 0
+
+
+
+    limitSentences = 5
+
     for i in range(len(sorted_x)):
         summary.append(str(sorted_x[i][0]).capitalize())
 
