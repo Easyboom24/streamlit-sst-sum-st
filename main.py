@@ -22,7 +22,7 @@ if file is not None:
     st.write(resultText)
 
     resultSummarizationSpacy = summarization_spacy(resultText, percent_of_text_sum)
-    st.text(str(resultSummarizationSpacy))
+    st.write(str(resultSummarizationSpacy))
 
     #TODO: аннотирование текста
 
