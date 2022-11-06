@@ -19,7 +19,7 @@ if file is not None:
     obj_response = uploadToBucketAndGetPath('itis', temp.name)
 
     resultText = func_speech(obj_response)
-    st.text(resultText)
+    st.write(resultText)
 
     #TODO: Сделать ползунок для выбора процента
     #TODO: преобразовывать процент в количество предложений исходя из максимального из resultText

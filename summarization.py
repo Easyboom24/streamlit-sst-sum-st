@@ -57,9 +57,8 @@ def summarization_spacy(text, percent_of_text_sum=50):
     sorted_x = sorted(sent_power.items(), key=lambda kv: kv[1], reverse=True)
     counter = 0
 
-
-
-    limitSentences = 5
+    max_sents = len(str(sorted_x))
+    limitSentences = round(max_sents * percent_of_text_sum / 100)
 
     for i in range(len(sorted_x)):
         summary.append(str(sorted_x[i][0]).capitalize())
