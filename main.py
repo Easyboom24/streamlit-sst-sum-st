@@ -14,11 +14,11 @@ percent_of_text_sum = st.slider(label="Процент сокращения те�
 file = st.file_uploader(label="Загрузите аудиозапись")
 
 st.header('Выберите, что вы хотите выделить в тексте:')
-names = st.checkbox('Личности, имена :red_circle:')
-orgs = st.checkbox('Компании, организации :large_yellow_circle:')
-locs = st.checkbox('Места, локации :large_blue_circle:')
-money = st.checkbox('Деньги, валюта :large_green_circle:')
-dates = st.checkbox('Даты :large_purple_circle:')
+names = st.checkbox('Личности, имена 🔴')
+orgs = st.checkbox('Компании, организации 🟡')
+locs = st.checkbox('Места, локации 🔵')
+money = st.checkbox('Деньги, валюта 🟢')
+dates = st.checkbox('Даты 🟣')
 
 if file is not None:
     temp = tempfile.NamedTemporaryFile(mode="wb")
