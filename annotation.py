@@ -12,49 +12,54 @@ from natasha import (
 
     Doc
 )
-def get_annotation(text, names, orgs, locs, money, address):
+def get_annotation(text, names = True, orgs = True, locs = True, money = True, dates = True):
     segmenter = Segmenter()
     morph_vocab = MorphVocab()
     emb = NewsEmbedding()
     ner_tagger = NewsNERTagger(emb)
-    
+
     names_extractor = NamesExtractor(morph_vocab)
     money_extractor = MoneyExtractor(morph_vocab)
     dates_extractor = DatesExtractor(morph_vocab)
     addr_extractor = AddrExtractor(morph_vocab)
-    
-    text = 'Фридрих Вильгельм Хуго Бусмайер (Буссмейер, нем. Friedrich Wilhelm Hugo Bußmeyer; 26 февраля 1842, Брауншвейг ' \
-           '— 1 февраля 1912, Рио-де-Жанейро) — бразильский пианист и композитор немецкого происхождения. Сын певца ' \
-           'Брауншвейгской придворной оперы Морица Бусмайера, брат Ханса Бусмайера. Учился у Анри Литольфа и Альберта ' \
-           'Метфесселя. С 1860 года гастролировал по Южной Америке, проехав через Бразилию, Уругвай, Аргентину, ' \
-           'Чили и Перу (где в 1866 году познакомился с Луи Моро Готтшалком). В 1867 году вернулся в Европу для концертов ' \
-           'в Париже, затем отправился в Мексику и к 1868 году добрался до Нью-Йорка, где прожил несколько лет и, ' \
-           'в частности, напечатал серию лёгких фантазий на известные оперные темы[4]. В 1874 году окончательно ' \
-           'обосновался в Бразилии, первоначально как профессор органа и аккомпанемента в Императорской консерватории, ' \
-           'а в 1875 году возглавил придворную капеллу императора Педру II и руководил ею вплоть до падения бразильской ' \
-           'монархии в 1889 году.[5] \n Twitter, 200 долларов, 150 р.'
+
+    output = []
+
     doc = Doc(text)
     doc.segment(segmenter)
     print("\nОсновные имена собственных")
-    doc.tag_ner(ner_tagger)
-    doc.ner.print() #Получение основных имен собственных (имена, организации, места или локации)
-    
-    #Получение данных с помощью экстракторов
-    # print("\nИмена")
-    # for elem in list(names_extractor(text)): #Получение имен
-    #     print(elem)
-    print("\nДеньги")
-    for elem in list(money_extractor(text)): #Денег
-        print(elem)
-    print("\nДаты")
-    for elem in list(dates_extractor(text)): #Дат
-        print(elem)
-    
-    lines = [
-        'Россия, Вологодская обл. г. Череповец, пр.Победы 93 б',
-        '692909, РФ, Приморский край, г. Находка, ул. Добролюбова, 18',
-        'ул. Народного Ополчения д. 9к.3'
-    ]
-    print("\nАдреса")
-    for line in lines:
-        print(addr_extractor.find(line))
+    if names or orgs or locs:
+        doc.tag_ner(ner_tagger)
+        for elem in doc.spans:
+            if elem.type == "PER" and names:
+                output.append([elem.start, elem.stop, elem.type])
+            elif elem.type == "LOC" and locs:
+                output.append([elem.start, elem.stop, elem.type])
+            elif elem.type == "ORG" and orgs:
+                output.append([elem.start, elem.stop, elem.type])
+    #doc.ner.print() #Получение о"сновных имен собственных (имена, организации, места или локации)
+
+    if (money):
+        for elem in list(money_extractor(text)): #Денег
+            output.append([elem.start, elem.stop, "Money"])
+    if (dates):
+        for elem in list(dates_extractor(text)):  # Даты
+            output.append([elem.start, elem.stop, "Date"])
+
+#    if (address):
+#        for elem in list(addr_extractor(text)): # Адреса
+#            if (elem.fact.type != 'село'):
+#                output.append([elem.start, elem.stop, "Address"])
+    output.sort(key=lambda elem: elem[0])
+
+    doc.ner.print()
+    i = len(output) - 1
+    end = 0
+    edited_text = ""
+    for elem in output:
+        start = elem[0]
+        stop = elem[1]
+        type = elem[2]
+        edited_text += text[end:start] + "<span type=\"" + type + "\">" + text[start:stop] + "</span>"
+        end = stop
+    return edited_text
