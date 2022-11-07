@@ -13,6 +13,12 @@ from annotation import get_annotation
 percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100, value=50)
 file = st.file_uploader(label="Загрузите аудиозапись")
 
+st.header('Выберите, что вы хотите выделить в тексте:')
+names = st.checkbox('Личности, имена')
+orgs = st.checkbox('Компании, организации')
+locs = st.checkbox('Места, локации')
+money = st.checkbox('Деньги, валюта')
+dates = st.checkbox('Даты')
 if file is not None:
     temp = tempfile.NamedTemporaryFile(mode="wb")
     bytes_data = file.getvalue()
@@ -24,6 +30,9 @@ if file is not None:
 
     resultSummarizationSpacy = summarization_spacy(resultText, percent_of_text_sum)
     st.write(str(resultSummarizationSpacy))
+    
+    resultAnnotation = get_annotation(str(resultSummarizationSpacy), names, orgs, locs, money, dates)
+    st.markdown(resultAnnotation, unsafe_allow_html=true)
 
     #TODO: аннотирование текста
 
