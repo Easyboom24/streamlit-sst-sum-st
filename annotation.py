@@ -27,6 +27,7 @@ def get_annotation(text, names = True, orgs = True, locs = True, money = True, d
 
     doc = Doc(text)
     doc.segment(segmenter)
+    print("\nОсновные имена собственных")
     if names or orgs or locs:
         doc.tag_ner(ner_tagger)
         for elem in doc.spans:
@@ -52,11 +53,12 @@ def get_annotation(text, names = True, orgs = True, locs = True, money = True, d
     output.sort(key=lambda elem: elem[0])
     i = len(output) - 1
     end = 0
+    colors = {"PER": "red", "ORG": "yellow", "LOC": "blue", "Date": "purple", "Money": "green"}
     edited_text = ""
     for elem in output:
         start = elem[0]
         stop = elem[1]
         type = elem[2]
-        edited_text += text[end:start] + "<span type=\"" + type + "\">" + text[start:stop] + "</span>"
+        edited_text += text[end:start] + "<span style=\"color:" + colors[type] + ";\">" + text[start:stop] + "</span>"
         end = stop
     return edited_text
