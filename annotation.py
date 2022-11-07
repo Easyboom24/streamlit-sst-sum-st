@@ -61,4 +61,6 @@ def get_annotation(text, names = True, orgs = True, locs = True, money = True, d
         type = elem[2]
         edited_text += text[end:start] + "<span style=\"color:" + colors[type] + ";\">" + text[start:stop] + "</span>"
         end = stop
+    if end != len(text) - 1:
+        edited_text += text[end:]
     return edited_text
