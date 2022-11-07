@@ -5,6 +5,7 @@ import tempfile
 #from summarization import summarization_sbercloud
 
 from summarization import summarization_spacy
+from annotatiom import get_annotation
 #import os
 #os.system("python -m spacy download ru_core_news_lg")
 
