@@ -27,7 +27,6 @@ def get_annotation(text, names = True, orgs = True, locs = True, money = True, d
 
     doc = Doc(text)
     doc.segment(segmenter)
-    print("\nОсновные имена собственных")
     if names or orgs or locs:
         doc.tag_ner(ner_tagger)
         for elem in doc.spans:
@@ -51,8 +50,6 @@ def get_annotation(text, names = True, orgs = True, locs = True, money = True, d
 #            if (elem.fact.type != 'село'):
 #                output.append([elem.start, elem.stop, "Address"])
     output.sort(key=lambda elem: elem[0])
-
-    doc.ner.print()
     i = len(output) - 1
     end = 0
     edited_text = ""
