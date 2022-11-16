@@ -10,7 +10,7 @@ from annotation import get_annotation
 #import os
 #os.system("python -m spacy download ru_core_news_lg")
 
-components.html("""
+st.markdown("""
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CH2M532WGY"></script>
 <script>
@@ -20,7 +20,9 @@ components.html("""
 
   gtag('config', 'G-CH2M532WGY');
 </script>
-""")
+""",
+unsafe_allow_html=True
+)
 
 
 percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100, value=50)
