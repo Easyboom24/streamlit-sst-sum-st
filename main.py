@@ -1,6 +1,7 @@
 from speechToText import func_speech
 from boto_file import uploadToBucketAndGetPath
 import streamlit as st
+import streamlit.components.v1 as components
 import tempfile
 #from summarization import summarization_sbercloud
 
@@ -8,6 +9,18 @@ from summarization import summarization_spacy
 from annotation import get_annotation
 #import os
 #os.system("python -m spacy download ru_core_news_lg")
+
+components.html("""
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CH2M532WGY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CH2M532WGY');
+</script>
+""")
 
 
 percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100, value=50)
