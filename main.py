@@ -35,6 +35,8 @@ dates = st.checkbox('Даты 🟣')
 
 buttonActivation = st.button('Запуск обработки')
 
+sta.track()
+
 if file is not None and buttonActivation:
     with sta.track():
         percent_of_text_sum, buttonActivation, names
