@@ -23,9 +23,8 @@ from annotation import get_annotation
 # </script>
 # """)
 
-with sta.track():
-    percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100, value=50)
-    file = st.file_uploader(label="Загрузите аудиозапись")
+percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100, value=50)
+file = st.file_uploader(label="Загрузите аудиозапись")
 
 st.header('Выберите, что вы хотите выделить в тексте:')
 names = st.checkbox('Личности, имена 🔴')
@@ -33,9 +32,6 @@ orgs = st.checkbox('Компании, организации 🟡')
 locs = st.checkbox('Места, локации 🔵')
 money = st.checkbox('Деньги, валюта 🟢')
 dates = st.checkbox('Даты 🟣')
-
-with sta.track():
-    buttonActivation = st.button('Запуск обработки')
 
 if file is not None and buttonActivation:
     with sta.track():
