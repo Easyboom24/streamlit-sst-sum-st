@@ -70,8 +70,8 @@ def summarization_spacy(text, percent_of_text_sum=50):
 
         # восстановление порядка предложений
         restored_sents_summary = []
-        for sum_sent in summary:
-            for sent in doc.sents:
+        for sent in doc.sents:
+            for sum_sent in summary:
                 if (str(sum_sent) == str(sent)):
                     restored_sents_summary.append(sum_sent)
                     break
