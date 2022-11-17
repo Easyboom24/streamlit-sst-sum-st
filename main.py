@@ -24,6 +24,7 @@ from annotation import get_annotation
 # """)
 
 with sta.track():
+    st.text('123')
     percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100, value=50)
     file = st.file_uploader(label="Загрузите аудиозапись")
 
@@ -38,7 +39,6 @@ with sta.track():
 
     if file is not None and buttonActivation:
         with st.spinner('Обработка текста...'):
-            st.text_input("Текст обработан")
             temp = tempfile.NamedTemporaryFile(mode="wb")
             bytes_data = file.getvalue()
             temp.write(bytes_data)
