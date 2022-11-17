@@ -33,7 +33,7 @@ def summarization_spacy(text, percent_of_text_sum=50):
     # токенизация
     keywords = []
     tags = ['PROPN', 'ADJ', 'NOUN', 'VERB']
-    doc = nlp(text.lower().replace('\n', '').replace('. ', '.').replace('.', '. '))
+    doc = nlp(text.replace('\n', '').replace('. ', '.').replace('.', '. ').replace('? ', '?').replace('?', '? ').replace('! ', '!').replace('!', '! '))
     for token in doc:
         if (token.text in nlp.Defaults.stop_words or token.text in punctuation):
             continue
@@ -67,6 +67,13 @@ def summarization_spacy(text, percent_of_text_sum=50):
             counter += 1
             if (counter >= limitSentences):
                 break
-        return ' '.join(summary)
+
+        # восстановление порядка предложений
+        restored_sents_summary = []
+        for sent in doc.sents:
+            for sum_sent in summary:
+                if sent == sum_sent:
+                    restored_sents_summary.append(sum_sent)
+        return ' '.join(restored_sents_summary)
     return ' '
 
