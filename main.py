@@ -38,6 +38,24 @@ with sta.track():
             'Даты 🟣'
         ]
     )
+    names = False
+    orgs = False
+    locs = False
+    money = False
+    dates = False
+
+    for option in options:
+        if option == 'Личности, имена 🔴':
+            names = True
+        if option == 'Компании, организации 🟡':
+            orgs = True
+        if option == 'Места, локации 🔵':
+            locs = True
+        if option == 'Деньги, валюта 🟢':
+            money = True
+        if option == 'Даты 🟣':
+            dates = True
+
 
     # st.header('Выберите, что вы хотите выделить в тексте:')
     # names = st.checkbox('Личности, имена 🔴')
@@ -64,24 +82,5 @@ with sta.track():
             st.write(str(resultSummarizationSpacy))
 
             st.header("Текст с выделенными фрагментами")
-
-            names = False
-            orgs = False
-            locs = False
-            money = False
-            dates = False
-
-            for option in options:
-                if option == 'Личности, имена 🔴':
-                    names = True
-                if option == 'Компании, организации 🟡':
-                    orgs = True
-                if option == 'Места, локации 🔵':
-                    locs = True
-                if option == 'Деньги, валюта 🟢':
-                    money = True
-                if option == 'Даты 🟣':
-                    dates = True
-
             resultAnnotation = get_annotation(str(resultSummarizationSpacy), names, orgs, locs, money, dates)
             st.markdown(resultAnnotation, unsafe_allow_html=True)
