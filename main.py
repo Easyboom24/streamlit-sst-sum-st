@@ -33,6 +33,8 @@ locs = st.checkbox('Места, локации 🔵')
 money = st.checkbox('Деньги, валюта 🟢')
 dates = st.checkbox('Даты 🟣')
 
+buttonActivation = st.button('Запуск обработки')
+
 if file is not None and buttonActivation:
     with sta.track():
         temp = tempfile.NamedTemporaryFile(mode="wb")
