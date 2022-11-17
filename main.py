@@ -5,10 +5,10 @@ import streamlit_analytics as sta
 # import streamlit.components.v1 as components
 import tempfile
 # from summarization import summarization_sbercloud
-import pathlib
-import logging
-import shutil
-from bs4 import BeautifulSoup
+# import pathlib
+# import logging
+# import shutil
+# from bs4 import BeautifulSoup
 import re
 import os
 
