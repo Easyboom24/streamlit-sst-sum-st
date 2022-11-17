@@ -37,7 +37,7 @@ buttonActivation = st.button('Запуск обработки')
 
 if file is not None and buttonActivation:
     with sta.track():
-        percent_of_text_sum, buttonActivation
+        percent_of_text_sum, buttonActivation, names
     temp = tempfile.NamedTemporaryFile(mode="wb")
     bytes_data = file.getvalue()
     temp.write(bytes_data)
