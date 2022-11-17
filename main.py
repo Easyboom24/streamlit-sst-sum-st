@@ -37,19 +37,20 @@ with sta.track():
     buttonActivation = st.button('Запуск обработки')
 
     if file is not None and buttonActivation:
-        temp = tempfile.NamedTemporaryFile(mode="wb")
-        bytes_data = file.getvalue()
-        temp.write(bytes_data)
-        obj_response = uploadToBucketAndGetPath('itis', temp.name)
+        with st.spinner('Обработка текста...'):
+            temp = tempfile.NamedTemporaryFile(mode="wb")
+            bytes_data = file.getvalue()
+            temp.write(bytes_data)
+            obj_response = uploadToBucketAndGetPath('itis', temp.name)
 
-        st.header("Исходный текст")
-        resultText = func_speech(obj_response)
-        st.write(resultText)
+            st.header("Исходный текст")
+            resultText = func_speech(obj_response)
+            st.write(resultText)
 
-        st.header("Сокращенный текст")
-        resultSummarizationSpacy = summarization_spacy(resultText, percent_of_text_sum)
-        st.write(str(resultSummarizationSpacy))
+            st.header("Сокращенный текст")
+            resultSummarizationSpacy = summarization_spacy(resultText, percent_of_text_sum)
+            st.write(str(resultSummarizationSpacy))
 
-        st.header("Текст с выделенными фрагментами")
-        resultAnnotation = get_annotation(str(resultSummarizationSpacy), names, orgs, locs, money, dates)
-        st.markdown(resultAnnotation, unsafe_allow_html=True)
+            st.header("Текст с выделенными фрагментами")
+            resultAnnotation = get_annotation(str(resultSummarizationSpacy), names, orgs, locs, money, dates)
+            st.markdown(resultAnnotation, unsafe_allow_html=True)
