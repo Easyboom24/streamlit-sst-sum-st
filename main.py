@@ -34,7 +34,9 @@ with sta.track():
     money = st.checkbox('Деньги, валюта 🟢')
     dates = st.checkbox('Даты 🟣')
 
-    if file is not None and st.button('Запуск обработки'):
+    buttonActivation = st.button('Запуск обработки')
+
+    if file is not None and buttonActivation:
         temp = tempfile.NamedTemporaryFile(mode="wb")
         bytes_data = file.getvalue()
         temp.write(bytes_data)
