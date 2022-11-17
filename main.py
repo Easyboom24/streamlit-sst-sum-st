@@ -4,12 +4,13 @@ import streamlit as st
 import streamlit_analytics as sta
 # import streamlit.components.v1 as components
 import tempfile
-#from summarization import summarization_sbercloud
+# from summarization import summarization_sbercloud
 
 from summarization import summarization_spacy
 from annotation import get_annotation
-#import os
-#os.system("python -m spacy download ru_core_news_lg")
+
+# import os
+# os.system("python -m spacy download ru_core_news_lg")
 
 # components.html("""
 # <!-- Google tag (gtag.js) -->
@@ -24,10 +25,19 @@ from annotation import get_annotation
 # """)
 
 with sta.track():
-    st.text('123')
     percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100, value=50)
     file = st.file_uploader(label="Загрузите аудиозапись")
 
+    options = st.multiselect(
+        'Выберите, что вы хотите выделить в тексте:',
+        [
+            'Личности, имена 🔴',
+            'Компании, организации 🟡',
+            'Места, локации 🔵',
+            'Деньги, валюта 🟢',
+            'Даты 🟣'
+        ]
+    )
     st.header('Выберите, что вы хотите выделить в тексте:')
     names = st.checkbox('Личности, имена 🔴')
     orgs = st.checkbox('Компании, организации 🟡')
