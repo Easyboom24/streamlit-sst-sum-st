@@ -25,7 +25,7 @@ from annotation import get_annotation
 # """)
 
 with sta.track():
-    percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100)
+    percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100, value=50)
     file = st.file_uploader(label="Загрузите аудиозапись")
 
     options = st.multiselect(
