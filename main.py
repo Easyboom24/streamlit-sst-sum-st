@@ -38,14 +38,24 @@ with sta.track():
             'Даты 🟣'
         ]
     )
-    names, orgs, locs, money, dates = False
+    names, orgs, locs, money, dates = False, False, False, False, False
 
     for option in options:
-        if option == 'Личности, имена 🔴': names = True
-        if option == 'Компании, организации 🟡': orgs = True
-        if option == 'Места, локации 🔵': locs = True
-        if option == 'Деньги, валюта 🟢': money = True
-        if option == 'Даты 🟣': dates = True
+        if option == 'Личности, имена 🔴':
+            names = True
+            break
+        if option == 'Компании, организации 🟡':
+            orgs = True
+            break
+        if option == 'Места, локации 🔵':
+            locs = True
+            break
+        if option == 'Деньги, валюта 🟢':
+            money = True
+            break
+        if option == 'Даты 🟣':
+            dates = True
+            break
 
 
     # st.header('Выберите, что вы хотите выделить в тексте:')
