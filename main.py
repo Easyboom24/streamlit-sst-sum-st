@@ -24,64 +24,65 @@ from annotation import get_annotation
 # </script>
 # """)
 
-with sta.track():
-    percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100, value=50)
-    file = st.file_uploader(label="Загрузите аудиозапись")
+percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100, value=50)
+file = st.file_uploader(label="Загрузите аудиозапись")
 
-    options = st.multiselect(
-        'Выберите, что вы хотите выделить в тексте:',
-        [
-            'Личности, имена 🔴',
-            'Компании, организации 🟡',
-            'Места, локации 🔵',
-            'Деньги, валюта 🟢',
-            'Даты 🟣'
-        ],
-    )
-    names, orgs, locs, money, dates = False, False, False, False, False
+options = st.multiselect(
+    'Выберите, что вы хотите выделить в тексте:',
+    [
+        'Личности, имена 🔴',
+        'Компании, организации 🟡',
+        'Места, локации 🔵',
+        'Деньги, валюта 🟢',
+        'Даты 🟣'
+    ],
+)
+names, orgs, locs, money, dates = False, False, False, False, False
 
-    for option in options:
-        if option == 'Личности, имена 🔴':
-            names = True
-            break
-        if option == 'Компании, организации 🟡':
-            orgs = True
-            break
-        if option == 'Места, локации 🔵':
-            locs = True
-            break
-        if option == 'Деньги, валюта 🟢':
-            money = True
-            break
-        if option == 'Даты 🟣':
-            dates = True
-            break
+for option in options:
+    if option == 'Личности, имена 🔴':
+        names = True
+        break
+    if option == 'Компании, организации 🟡':
+        orgs = True
+        break
+    if option == 'Места, локации 🔵':
+        locs = True
+        break
+    if option == 'Деньги, валюта 🟢':
+        money = True
+        break
+    if option == 'Даты 🟣':
+        dates = True
+        break
 
 
-    # st.header('Выберите, что вы хотите выделить в тексте:')
-    # names = st.checkbox('Личности, имена 🔴')
-    # orgs = st.checkbox('Компании, организации 🟡')
-    # locs = st.checkbox('Места, локации 🔵')
-    # money = st.checkbox('Деньги, валюта 🟢')
-    # dates = st.checkbox('Даты 🟣')
+# st.header('Выберите, что вы хотите выделить в тексте:')
+# names = st.checkbox('Личности, имена 🔴')
+# orgs = st.checkbox('Компании, организации 🟡')
+# locs = st.checkbox('Места, локации 🔵')
+# money = st.checkbox('Деньги, валюта 🟢')
+# dates = st.checkbox('Даты 🟣')
 
-    buttonActivation = st.button('Запуск обработки')
+buttonActivation = st.button('Запуск обработки')
 
-    if file is not None and buttonActivation:
-        with st.spinner('Обработка текста...'):
-            temp = tempfile.NamedTemporaryFile(mode="wb")
-            bytes_data = file.getvalue()
-            temp.write(bytes_data)
-            obj_response = uploadToBucketAndGetPath('itis', temp.name)
+if file is not None and buttonActivation:
+    with st.spinner('Обработка текста...'):
+        sta.start_tracking()
+        temp = tempfile.NamedTemporaryFile(mode="wb")
+        bytes_data = file.getvalue()
+        temp.write(bytes_data)
+        obj_response = uploadToBucketAndGetPath('itis', temp.name)
 
-            st.header("Исходный текст")
-            resultText = func_speech(obj_response)
-            st.write(resultText)
+        st.header("Исходный текст")
+        resultText = func_speech(obj_response)
+        st.write(resultText)
 
-            st.header("Сокращенный текст")
-            resultSummarizationSpacy = summarization_spacy(resultText, percent_of_text_sum)
-            st.write(str(resultSummarizationSpacy))
+        st.header("Сокращенный текст")
+        resultSummarizationSpacy = summarization_spacy(resultText, percent_of_text_sum)
+        st.write(str(resultSummarizationSpacy))
 
-            st.header("Текст с выделенными фрагментами")
-            resultAnnotation = get_annotation(str(resultSummarizationSpacy), names, orgs, locs, money, dates)
-            st.markdown(resultAnnotation, unsafe_allow_html=True)
+        st.header("Текст с выделенными фрагментами")
+        resultAnnotation = get_annotation(str(resultSummarizationSpacy), names, orgs, locs, money, dates)
+        st.markdown(resultAnnotation, unsafe_allow_html=True)
+        sta.stop_tracking()
