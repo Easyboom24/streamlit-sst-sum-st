@@ -62,7 +62,7 @@ def inject_ga():
         index_path.write_text(new_html)
 
 
-# inject_ga()
+inject_ga()
 
 
 with sta.track():
