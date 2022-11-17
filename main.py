@@ -38,20 +38,19 @@ with sta.track():
 
     if file is not None and buttonActivation:
         with st.spinner('Обработка текста...'):
-            with sta.track():
-                temp = tempfile.NamedTemporaryFile(mode="wb")
-                bytes_data = file.getvalue()
-                temp.write(bytes_data)
-                obj_response = uploadToBucketAndGetPath('itis', temp.name)
+            temp = tempfile.NamedTemporaryFile(mode="wb")
+            bytes_data = file.getvalue()
+            temp.write(bytes_data)
+            obj_response = uploadToBucketAndGetPath('itis', temp.name)
 
-                st.header("Исходный текст")
-                resultText = func_speech(obj_response)
-                st.write(resultText)
+            st.header("Исходный текст")
+            resultText = func_speech(obj_response)
+            st.write(resultText)
 
-                st.header("Сокращенный текст")
-                resultSummarizationSpacy = summarization_spacy(resultText, percent_of_text_sum)
-                st.write(str(resultSummarizationSpacy))
+            st.header("Сокращенный текст")
+            resultSummarizationSpacy = summarization_spacy(resultText, percent_of_text_sum)
+            st.write(str(resultSummarizationSpacy))
 
-                st.header("Текст с выделенными фрагментами")
-                resultAnnotation = get_annotation(str(resultSummarizationSpacy), names, orgs, locs, money, dates)
-                st.markdown(resultAnnotation, unsafe_allow_html=True)
+            st.header("Текст с выделенными фрагментами")
+            resultAnnotation = get_annotation(str(resultSummarizationSpacy), names, orgs, locs, money, dates)
+            st.markdown(resultAnnotation, unsafe_allow_html=True)
