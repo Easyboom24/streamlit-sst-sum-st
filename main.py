@@ -36,6 +36,8 @@ dates = st.checkbox('Даты 🟣')
 buttonActivation = st.button('Запуск обработки')
 
 if file is not None and buttonActivation:
+    with sta.track():
+        percent_of_text_sum, buttonActivation
     temp = tempfile.NamedTemporaryFile(mode="wb")
     bytes_data = file.getvalue()
     temp.write(bytes_data)
@@ -52,5 +54,3 @@ if file is not None and buttonActivation:
     st.header("Текст с выделенными фрагментами")
     resultAnnotation = get_annotation(str(resultSummarizationSpacy), names, orgs, locs, money, dates)
     st.markdown(resultAnnotation, unsafe_allow_html=True)
-
-sta.track()
