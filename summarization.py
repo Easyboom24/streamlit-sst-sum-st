@@ -72,7 +72,7 @@ def summarization_spacy(text, percent_of_text_sum=50):
         restored_sents_summary = []
         for sent in doc.sents:
             for sum_sent in summary:
-                if (str(sum_sent) == str(sent)):
+                if (str(sum_sent).lower() == str(sent).lower()):
                     restored_sents_summary.append(sum_sent)
                     break
         return ' '.join(restored_sents_summary)
