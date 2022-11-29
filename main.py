@@ -138,7 +138,7 @@ with sta.track():
             temp = tempfile.NamedTemporaryFile(mode="wb")
             bytes_data = file.getvalue()
             temp.write(bytes_data)
-            obj_response = uploadToBucketAndGetPath('itis', temp.name)
+            obj_response = uploadToBucketAndGetPath('for-education-bucket', temp.name)
 
             st.header("Исходный текст")
             resultText = func_speech(obj_response)
