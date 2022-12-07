@@ -5,8 +5,10 @@ import streamlit as st
 import json
 import tempfile
  
+my_str = st.secrets["KEY_FIREBASE"]
+my_str_as_bytes = str.encode(my_str)
 tfile = tempfile.TemporaryFile()
-tfile.write(st.secrets["KEY_FIREBASE"])
+tfile.write(my_str_as_bytes)
 cred = credentials.Certificate(tfile.name)
 try:
     firebase_admin.initialize_app(cred)
