@@ -6,12 +6,12 @@ import json
 import tempfile
  
 my_str = st.secrets["KEY_FIREBASE"]
-my_str_as_bytes = str.encode(my_str)
-tfile = tempfile.TemporaryFile(mode="wb")
-tfile.write(my_str_as_bytes)
-cred = credentials.Certificate(tfile.name)
+import json,tempfile
+tfile = tempfile.NamedTemporaryFile(mode="w+")
+json.dump(my_str, tfile)
+tfile.flush()
 try:
-    firebase_admin.initialize_app(cred)
+    firebase_admin.initialize_app(tfile.name)
 except:
     print("Already connected")
 #Функция должна срабатывать каждый раз, когда нажалась кнопка и пошел процесс основной работы
