@@ -5,17 +5,17 @@ import streamlit as st
 import json
 import tempfile
  
+config = {st.secrets["KEY_FIREBASE"]}
+tfile = tempfile.NamedTemporaryFile(mode="w+")
+json.dump(config, tfile)
+tfile.flush()
+cred = credentials.Certificate(tfile.name)
+try:
+    firebase_admin.initialize_app(cred)
+except:
+    print("Already connected")
 #Функция должна срабатывать каждый раз, когда нажалась кнопка и пошел процесс основной работы
 def FireBase_Push(date, percentSum, textLength, CheckBoxes, timeYandex):
-    config = {st.secrets["KEY_FIREBASE"]}
-    tfile = tempfile.NamedTemporaryFile(mode="w+")
-    json.dump(config, tfile)
-    tfile.flush()
-    cred = credentials.Certificate(tfile.name)
-    try:
-        firebase_admin.initialize_app(cred)
-    except:
-        print("Already connected")
     ref = db.reference(path="/Analitics", url="https://streamlit-sst-sum-default-rtdb.firebaseio.com") 
     if (len(CheckBoxes) != 5):
         return "Not this array!"
@@ -34,11 +34,6 @@ def FireBase_Push(date, percentSum, textLength, CheckBoxes, timeYandex):
                  })
         return "Success"
 def FireBase_Get():
-    cred = credentials.Certificate(st.secrets["KEY_FIREBASE"])
-    try:
-        firebase_admin.initialize_app(cred)
-    except:
-        print("Already connected")
     ref = db.reference(path="/Analitics", url="https://streamlit-sst-sum-default-rtdb.firebaseio.com") 
     return ref.get()
 
