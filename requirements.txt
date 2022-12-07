@@ -9,7 +9,6 @@ wheel
 spacy>=3.4.0,<3.5.0
 https://github.com/explosion/spacy-models/releases/download/ru_core_news_lg-3.4.0/ru_core_news_lg-3.4.0-py3-none-any.whl
 natasha
-time
 firebase_admin
 matplotlib
 pandas
