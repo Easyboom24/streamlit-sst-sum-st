@@ -7,7 +7,7 @@ import tempfile
  
 my_str = st.secrets["KEY_FIREBASE"]
 my_str_as_bytes = str.encode(my_str)
-tfile = tempfile.TemporaryFile()
+tfile = tempfile.TemporaryFile(mode="wb")
 tfile.write(my_str_as_bytes)
 cred = credentials.Certificate(tfile.name)
 try:
