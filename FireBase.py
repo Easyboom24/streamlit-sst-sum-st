@@ -5,10 +5,8 @@ import streamlit as st
 import json
 import tempfile
  
-config = {st.secrets["KEY_FIREBASE"]}
-tfile = tempfile.NamedTemporaryFile(mode="w+")
-json.dump(config, tfile)
-tfile.flush()
+tfile = tempfile.TemporaryFile()
+tfile.write(st.secrets["KEY_FIREBASE"])
 cred = credentials.Certificate(tfile.name)
 try:
     firebase_admin.initialize_app(cred)
