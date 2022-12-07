@@ -1,7 +1,7 @@
 from speechToText import func_speech
 from boto_file import uploadToBucketAndGetPath
 import streamlit as st
-from Analitics import getAnalitics
+#from Analitics import getAnalitics
 # import streamlit.components.v1 as components
 import tempfile
 # from summarization import summarization_sbercloud
@@ -150,4 +150,4 @@ if file is not None and buttonActivation:
         st.header("Текст с выделенными фрагментами")
         resultAnnotation = get_annotation(str(resultSummarizationSpacy), names, orgs, locs, money, dates)
         st.markdown(resultAnnotation, unsafe_allow_html=True)
-getAnalitics()
+#getAnalitics()
