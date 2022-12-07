@@ -39,10 +39,7 @@ def FireBase_Get():
     tfile = tempfile.NamedTemporaryFile(mode="w+")
     json.dump(my_str, tfile)
     tfile.flush()
-    try:
-        firebase_admin.initialize_app(tfile.name)
-    except:
-        print("Already connected")
+    firebase_admin.initialize_app(tfile.name)
     ref = db.reference(path="/Analitics", url="https://streamlit-sst-sum-default-rtdb.firebaseio.com") 
     return ref.get()
 
