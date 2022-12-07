@@ -149,5 +149,5 @@ if file is not None and buttonActivation:
 
         st.header("Текст с выделенными фрагментами")
         resultAnnotation = get_annotation(str(resultSummarizationSpacy), names, orgs, locs, money, dates)
-        st.markdown(resultAnnotation, unsafe_allow_html=True
+        st.markdown(resultAnnotation, unsafe_allow_html=True)
 getAnalitics()
