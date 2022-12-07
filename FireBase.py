@@ -2,10 +2,16 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 import streamlit as st
+import json
+import tempfile
  
 #Функция должна срабатывать каждый раз, когда нажалась кнопка и пошел процесс основной работы
 def FireBase_Push(date, percentSum, textLength, CheckBoxes, timeYandex):
-    cred = credentials.Certificate(st.secrets["KEY_FIREBASE"])
+    config = {st.secrets["KEY_FIREBASE"]}
+    tfile = tempfile.NamedTemporaryFile(mode="w+")
+    json.dump(config, tfile)
+    tfile.flush()
+    cred = credentials.Certificate(tfile.name)
     try:
         firebase_admin.initialize_app(cred)
     except:
