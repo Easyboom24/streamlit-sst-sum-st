@@ -15,7 +15,7 @@ def FireBase_Push(date, percentSum, textLength, CheckBoxes, timeYandex):
     try:
         firebase_admin.initialize_app(tfile.name)
     except:
-    print("Already connected")
+        print("Already connected")
     ref = db.reference(path="/Analitics", url="https://streamlit-sst-sum-default-rtdb.firebaseio.com") 
     if (len(CheckBoxes) != 5):
         return "Not this array!"
@@ -42,7 +42,7 @@ def FireBase_Get():
     try:
         firebase_admin.initialize_app(tfile.name)
     except:
-    print("Already connected")
+        print("Already connected")
     ref = db.reference(path="/Analitics", url="https://streamlit-sst-sum-default-rtdb.firebaseio.com") 
     return ref.get()
 
