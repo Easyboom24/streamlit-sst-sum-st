@@ -2,21 +2,20 @@ from speechToText import func_speech
 from boto_file import uploadToBucketAndGetPath
 import streamlit as st
 from Analitics import getAnalitics
-# import streamlit.components.v1 as components
+from Analitics import FireBase_Push
+from datetime import date
 import tempfile
 import time
+import re
+import os
+from summarization import summarization_spacy
+from annotation import get_annotation
+# import streamlit.components.v1 as components
 # from summarization import summarization_sbercloud
 # import pathlib
 # import logging
 # import shutil
 # from bs4 import BeautifulSoup
-import re
-import os
-
-from summarization import summarization_spacy
-from annotation import get_annotation
-
-# import os
 # os.system("python -m spacy download ru_core_news_lg")
 
 # components.html(
@@ -134,6 +133,14 @@ dates = st.checkbox('Даты 🟣')
 buttonActivation = st.button('Запуск обработки')
 
 if file is not None and buttonActivation:
+    date = str(date.today()) 
+    percentSum = percent_of_text_sum
+    CheckBoxes = []
+    CheckBoxes.append(names)
+    CheckBoxes.append(orgs)
+    CheckBoxes.append(locs)
+    CheckBoxes.append(money)
+    CheckBoxes.append(dates)
     with st.spinner('Обработка текста...'):
         temp = tempfile.NamedTemporaryFile(mode="wb")
         bytes_data = file.getvalue()
@@ -143,7 +150,8 @@ if file is not None and buttonActivation:
         st.header("Исходный текст")
         start_time = time.time()
         resultText = func_speech(obj_response)
-        st.write(time.time() - start_time)
+        timeYandex = time.time() - start_time #var for analitics
+        textLength = len(resultText) #var for analitics
         st.write(resultText)
 
         st.header("Сокращенный текст")
@@ -153,4 +161,5 @@ if file is not None and buttonActivation:
         st.header("Текст с выделенными фрагментами")
         resultAnnotation = get_annotation(str(resultSummarizationSpacy), names, orgs, locs, money, dates)
         st.markdown(resultAnnotation, unsafe_allow_html=True)
+    FireBase_Push(date, percentSum, textLength, CheckBoxes, timeYandex)
 getAnalitics()
