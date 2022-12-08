@@ -4,6 +4,7 @@ import streamlit as st
 from Analitics import getAnalitics
 # import streamlit.components.v1 as components
 import tempfile
+import time
 # from summarization import summarization_sbercloud
 # import pathlib
 # import logging
@@ -140,7 +141,9 @@ if file is not None and buttonActivation:
         obj_response = uploadToBucketAndGetPath('for-education-bucket', temp.name)
 
         st.header("Исходный текст")
+        start_time = time.time()
         resultText = func_speech(obj_response)
+        st.write(time.time - start_time)
         st.write(resultText)
 
         st.header("Сокращенный текст")
