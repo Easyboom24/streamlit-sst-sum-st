@@ -165,5 +165,5 @@ if file is not None and buttonActivation:
 get_query = st.experimental_get_query_params()
 if "analitics" in get_query:
     st.write(get_query["analitics"])
-    if get_query["analitics"] == "on":
+    if get_query["analitics"][0] == "on":
         getAnalitics()
