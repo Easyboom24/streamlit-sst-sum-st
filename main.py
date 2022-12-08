@@ -150,7 +150,7 @@ if file is not None and buttonActivation:
         st.header("Исходный текст")
         start_time = time.time()
         resultText = func_speech(obj_response)
-        timeYandex = time.time() - start_time #var for analitics
+        timeYandex = round(time.time() - start_time, 2) #var for analitics
         textLength = len(resultText) #var for analitics
         st.write(resultText)
 
@@ -162,4 +162,7 @@ if file is not None and buttonActivation:
         resultAnnotation = get_annotation(str(resultSummarizationSpacy), names, orgs, locs, money, dates)
         st.markdown(resultAnnotation, unsafe_allow_html=True)
     FireBase_Push(date, percentSum, textLength, CheckBoxes, timeYandex)
-getAnalitics()
+get_query = st.experimental_get_query_params()
+if "analitics" in get_query:
+    if get_query["analitics"] == "on":
+        getAnalitics()
