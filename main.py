@@ -166,5 +166,5 @@ get_query = st.experimental_get_query_params()
 if "analitics" in get_query:
     if get_query["analitics"][0] == "on":
         buttonAnalitic = st.button('Показать аналитику')
-        if file is not None and buttonAnalitic:
+        if buttonAnalitic:
             getAnalitics()
