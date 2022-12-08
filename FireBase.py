@@ -26,9 +26,11 @@ def FireBase_Push(date, percentSum, textLength, CheckBoxes, timeYandex):
                     
                  })
         return "Success"
-#def FireBase_Get():
-    #cred = credentials.Certificate("key.json")
-    #firebase_admin.initialize_app(cred)
-    #print("Already connected")
-    #ref = db.reference(path="/Analitics", url="https://streamlit-sst-sum-default-rtdb.firebaseio.com") 
-    #return ref.get()
+def FireBase_Get():
+    cred = credentials.Certificate("key.json")
+    try:
+        firebase_admin.initialize_app(cred)
+    except:
+        print("Already connected")
+    ref = db.reference(path="/Analitics", url="https://streamlit-sst-sum-default-rtdb.firebaseio.com") 
+    return ref.get()
