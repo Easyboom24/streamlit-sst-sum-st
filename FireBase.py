@@ -27,7 +27,7 @@ def FireBase_Push(date, percentSum, textLength, CheckBoxes, timeYandex):
                  })
         return "Success"
 def FireBase_Get():
-    cred = credentials.Certificate("key.json")
+    #cred = credentials.Certificate("key.json")
     try:
         firebase_admin.initialize_app(cred)
     except:
