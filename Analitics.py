@@ -23,11 +23,11 @@ def getAnalitics():
         df = df.append(elem[1], ignore_index=True)
     df["Имена"].astype(int)
     df["Организации"].astype(int)
-    df["Без выделений"] = sum((df["Имена"] == 0) & 
-                              (df["Организации"] == 0) & 
-                              (df["Локации"] == 0) & 
-                              (df["Деньги"] == 0) & 
-                              (df["Даты"] == 0))
+    df["Без выделений"] = ((df["Имена"] == 0) & 
+                          (df["Организации"] == 0) & 
+                          (df["Локации"] == 0) & 
+                          (df["Деньги"] == 0) & 
+                          (df["Даты"] == 0))
     
     fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(9, 19))
     
