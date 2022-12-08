@@ -5,7 +5,7 @@ import streamlit as st
 import json
 
 def FireBase_Push(date, percentSum, textLength, CheckBoxes, timeYandex):
-    cred = credentials.Certificate("key.json")
+    cred = credentials.Certificate(json.loads(st.secrets["KEY_FIREBASE"]))
     try:
         firebase_admin.initialize_app(cred)
     except:
@@ -28,7 +28,7 @@ def FireBase_Push(date, percentSum, textLength, CheckBoxes, timeYandex):
                  })
         return "Success"
 def FireBase_Get():
-    cred = credentials.Certificate(json.loads(st.sectrets["KEY_FIREBASE"]))
+    cred = credentials.Certificate(json.loads(st.secrets["KEY_FIREBASE"]))
     try:
         firebase_admin.initialize_app(cred)
     except:
