@@ -143,7 +143,7 @@ if file is not None and buttonActivation:
         st.header("Исходный текст")
         start_time = time.time()
         resultText = func_speech(obj_response)
-        st.write(time.time - start_time)
+        st.write(time.time() - start_time)
         st.write(resultText)
 
         st.header("Сокращенный текст")
