@@ -2,7 +2,7 @@ from speechToText import func_speech
 from boto_file import uploadToBucketAndGetPath
 import streamlit as st
 from Analitics import getAnalitics
-from Analitics import FireBase_Push
+from FireBase import FireBase_Push
 from datetime import date
 import tempfile
 import time
