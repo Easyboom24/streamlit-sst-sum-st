@@ -12,5 +12,6 @@ natasha
 firebase_admin
 matplotlib
 pandas
+json
 #pathlib
 #beautifulsoup4
