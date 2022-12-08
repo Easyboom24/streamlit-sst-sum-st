@@ -28,6 +28,7 @@ def FireBase_Push(date, percentSum, textLength, CheckBoxes, timeYandex):
                  })
         return "Success"
 def FireBase_Get():
+    st.write(json.loads(st.secrets["KEY_FIREBASE"]))
     cred = credentials.Certificate(json.loads(st.secrets["KEY_FIREBASE"]))
     try:
         firebase_admin.initialize_app(cred)
