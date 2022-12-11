@@ -21,11 +21,20 @@ def func_speech(audio):
     data = res.json()
     operationId = data['id']
 
+   
     while True:
         res = requests.get('https://operation.api.cloud.yandex.net/operations/{operationId}'.format(operationId=operationId),
         headers=header)
         res = res.json()
-        if res['done']: break
+        try:
+            if res['done']: 
+                break
+        except Exception:
+            print(res)
+            st.write(str(res))
+
+        
+    
 
     result = ""
     for chunk in res['response']['chunks']:
