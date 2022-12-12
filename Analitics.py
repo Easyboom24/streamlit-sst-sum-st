@@ -29,7 +29,7 @@ def getAnalitics():
                           (df["Деньги"] == 0) & 
                           (df["Даты"] == 0))
     
-    fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(9, 19))
+    fig, (ax1, ax2, ax3, ax4) = plt.subplots(nrows=4ncols=1, figsize=(9, 25)
     
     #Гистограмма для чекбоксов (одна, по y  доля использований, по x все чекбоксы)
     ax1.bar(['Имена','Организации', 'Локации', 'Деньги', 'Даты', 'Без выделений'], height=[(sum(df["Имена"] == 1)/len(df)) * 100, 
@@ -50,6 +50,11 @@ def getAnalitics():
     ax3.set_title('Количество обрабонного текста по проценту сокращения')
     ax3.set_xlabel("Процент сокращения")
     ax3.set_ylabel("Количество обработок по этому проценту")
+                                             
+    ax4.plot("Длина текста", "Время работы SpeechKit", data=df)
+    ax4.set_title('Количество обрабонного текста по проценту сокращения')
+    ax4.set_xlabel("Количество символов")
+    ax4.set_ylabel("Время работы SpeechKit, сек")
     st.write(fig)
     
     #Средняя длина текста - просто вывод
@@ -74,5 +79,4 @@ def getAnalitics():
     
 #Время работы SpeechKit в зависимости от длины текста (График, где x - длина текста, а y Время работы speechkit),
 #plt.hist(data=df, x="Длина текста", y)
-#plt.plot("Длина текста", "Время работы SpeechKit", data=df)
 #plt.show()
