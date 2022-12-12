@@ -52,7 +52,7 @@ def getAnalitics():
     ax3.set_ylabel("Количество обработок по этому проценту")
                                              
     ax4.plot("Длина текста", "Время работы SpeechKit", data=df)
-    ax4.set_title('Количество обрабонного текста по проценту сокращения')
+    ax4.set_title('Время работы Yandex SpeechKit в зависимости от количества символов')
     ax4.set_xlabel("Количество символов")
     ax4.set_ylabel("Время работы SpeechKit, сек")
     st.write(fig)
