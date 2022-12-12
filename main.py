@@ -163,8 +163,8 @@ if file is not None and buttonActivation:
         st.markdown(resultAnnotation, unsafe_allow_html=True)
     FireBase_Push(date, percentSum, textLength, CheckBoxes, timeYandex)
 get_query = st.experimental_get_query_params()
-if "analitics" in get_query:
-    if get_query["analitics"][0] == "on":
+if "analytics" in get_query:
+    if get_query["analytics"][0] == "on":
         buttonAnalitic = st.button('Показать аналитику')
         if buttonAnalitic:
             getAnalitics()
