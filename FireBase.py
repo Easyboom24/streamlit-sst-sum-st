@@ -10,6 +10,8 @@ def FireBase_Push(date, percentSum, textLength, CheckBoxes, timeYandex):
         firebase_admin.initialize_app(cred)
     except:
         print("Already connected")
+    if !(percentSum):
+        percentSum = null
     ref = db.reference(path="/Analitics", url="https://streamlit-sst-sum-default-rtdb.firebaseio.com") 
     if (len(CheckBoxes) != 5):
         return "Not this array!"
