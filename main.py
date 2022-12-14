@@ -88,6 +88,17 @@ with open(a, 'r') as f:
         with open(a, 'w') as ff:
             newdata=re.sub('<head>','<head>'+code,data)
             ff.write(newdata)
+            
+options = st.multiselect(
+   'Выберите вариант сокращения текста',
+   [
+       'Spacy суммаризатор',
+       'Сбер суммаризатор sber search',
+       'Сбер суммаризатор sampling'
+   ],
+)
+
+st.write(options)
 
 
 percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100, value=50)
