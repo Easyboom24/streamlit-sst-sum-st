@@ -80,6 +80,8 @@ def summarization_spacy(text, percent_of_text_sum=50):
 
     max_sents = len(sorted_x)
     limitSentences = round(max_sents * percent_of_text_sum / 100)
+    if limitSentences == 0:
+        limitSentences = 1
 
     if limitSentences != 0:
         for i in range(len(sorted_x)):
