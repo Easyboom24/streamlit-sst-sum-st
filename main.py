@@ -9,6 +9,8 @@ import time
 import re
 import os
 from summarization import summarization_spacy
+from summarization import summarization_sbercloud_beam
+from summarization import summarization_sbercloud_sampling
 from annotation import get_annotation
 # import streamlit.components.v1 as components
 # from summarization import summarization_sbercloud
