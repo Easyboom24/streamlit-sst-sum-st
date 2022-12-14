@@ -98,7 +98,7 @@ option = st.selectbox(
    ],
 )
 
-st.write(options)
+st.write(option)
 
 
 percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100, value=50)
