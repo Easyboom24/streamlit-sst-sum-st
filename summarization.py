@@ -7,7 +7,7 @@ from string import punctuation
 #import ru_core_news_lg
 
 
-def summarization_sbercloud(text):
+def summarization_sbercloud_beam(text):
     url = "https://api.aicloud.sbercloud.ru/public/v2/summarizator/predict"
     headers = {
         'Accept': 'application/json',
@@ -18,7 +18,28 @@ def summarization_sbercloud(text):
             {
                 'text': text,
                 'num_return_sequences': 100,
-                'length_penalty': 10
+                'length_penalty': 10,
+                'genstrategy': 0
+            }
+        ]
+    }
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+    return json.loads(response.text)
+
+
+def summarization_sbercloud_sampling(text):
+    url = "https://api.aicloud.sbercloud.ru/public/v2/summarizator/predict"
+    headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+    data = {
+        'instances': [
+            {
+                'text': text,
+                'num_return_sequences': 100,
+                'length_penalty': 10,
+                'genstrategy': 1
             }
         ]
     }
