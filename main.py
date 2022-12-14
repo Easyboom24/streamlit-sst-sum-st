@@ -89,7 +89,7 @@ with open(a, 'r') as f:
             newdata=re.sub('<head>','<head>'+code,data)
             ff.write(newdata)
             
-options = st.multiselect(
+option = st.selectbox(
    'Выберите вариант сокращения текста',
    [
        'Spacy суммаризатор',
