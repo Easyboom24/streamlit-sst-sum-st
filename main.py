@@ -172,14 +172,14 @@ if file is not None and buttonActivation:
         if option == 'Spacy суммаризатор':
             resultSummarization = summarization_spacy(resultText, percent_of_text_sum)
         elif option == 'Сбер суммаризатор sber search':
-            resultSummarization = summarization_sbercloud_beam(resultText)
+            resultSummarization = summarization_sbercloud_beam(resultText)['predictions']
         elif option == 'Сбер суммаризатор sampling':
-            resultSummarization = summarization_sbercloud_sampling(resultText)
+            resultSummarization = summarization_sbercloud_sampling(resultText)['predictions']
         
         st.write(str(resultSummarization))
 
         st.header("Текст с выделенными фрагментами")
-        resultAnnotation = get_annotation(str(resultSummarizationSpacy), names, orgs, locs, money, dates)
+        resultAnnotation = get_annotation(str(resultSummarization), names, orgs, locs, money, dates)
         st.markdown(resultAnnotation, unsafe_allow_html=True)
     FireBase_Push(date, percentSum, textLength, CheckBoxes, timeYandex)
 get_query = st.experimental_get_query_params()
