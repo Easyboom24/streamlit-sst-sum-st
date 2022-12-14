@@ -148,6 +148,8 @@ if file is not None and buttonActivation:
     date = str(date.today())
     if option == 'Spacy суммаризатор':
         percentSum = percent_of_text_sum
+    else:
+        percentSum = False
     CheckBoxes = []
     CheckBoxes.append(names)
     CheckBoxes.append(orgs)
