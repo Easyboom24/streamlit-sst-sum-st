@@ -88,7 +88,9 @@ with open(a, 'r') as f:
         with open(a, 'w') as ff:
             newdata=re.sub('<head>','<head>'+code,data)
             ff.write(newdata)
-            
+
+file = st.file_uploader(label="Загрузите аудиозапись", type=['mp3'])
+
 option = st.selectbox(
    'Выберите вариант сокращения текста',
    [
@@ -100,8 +102,6 @@ option = st.selectbox(
 
 if option == 'Spacy суммаризатор':
     percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100, value=50)
-
-file = st.file_uploader(label="Загрузите аудиозапись", type=['mp3'])
 
 # options = st.multiselect(
 #    'Выберите, что вы хотите выделить в тексте:',
