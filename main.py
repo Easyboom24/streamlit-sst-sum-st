@@ -143,8 +143,9 @@ dates = st.checkbox('Даты 🟣')
 buttonActivation = st.button('Запуск обработки')
 
 if file is not None and buttonActivation:
-    date = str(date.today()) 
-    percentSum = percent_of_text_sum
+    date = str(date.today())
+    if option == 'Spacy суммаризатор':
+        percentSum = percent_of_text_sum
     CheckBoxes = []
     CheckBoxes.append(names)
     CheckBoxes.append(orgs)
