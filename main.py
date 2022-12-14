@@ -98,10 +98,9 @@ option = st.selectbox(
    ],
 )
 
-st.write(option)
+if option == 'Spacy суммаризатор':
+    percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100, value=50)
 
-
-percent_of_text_sum = st.slider(label="Процент сокращения текста", min_value=0, max_value=100, value=50)
 file = st.file_uploader(label="Загрузите аудиозапись", type=['mp3'])
 
 # options = st.multiselect(
@@ -166,8 +165,15 @@ if file is not None and buttonActivation:
         st.write(resultText)
 
         st.header("Сокращенный текст")
-        resultSummarizationSpacy = summarization_spacy(resultText, percent_of_text_sum)
-        st.write(str(resultSummarizationSpacy))
+        resultSummarization = 'Суммаризованный текст будет здесь';
+        if option == 'Spacy суммаризатор':
+            resultSummarization = summarization_spacy(resultText, percent_of_text_sum)
+        elif option == 'Сбер суммаризатор sber search':
+            resultSummarization = summarization_sbercloud_beam(resultText)
+        elif option == 'Сбер суммаризатор sampling':
+            resultSummarization = summarization_sbercloud_sampling(resultText)
+        
+        st.write(str(resultSummarization))
 
         st.header("Текст с выделенными фрагментами")
         resultAnnotation = get_annotation(str(resultSummarizationSpacy), names, orgs, locs, money, dates)
